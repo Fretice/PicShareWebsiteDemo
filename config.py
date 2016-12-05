@@ -1,6 +1,6 @@
 import os
 
-_basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
@@ -16,5 +16,13 @@ class Config:
         pass
 
 
-class DevelopmentConfig:
+class DevelopmentConfig(Config):
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
+        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+
+
+config = {
+    'development': DevelopmentConfig,
+    'default': DevelopmentConfig
+}
