@@ -30,14 +30,15 @@ class Role(db.Model):
     name = db.Column(db.String(32), unique=True)
     permissions = db.Column(db.Integer)
     users = db.relationship('User', backref='role', lazy='dynamic')
+    default = db.Column(db.Boolean, default=False, index=True)
 
     @staticmethod
     def insert_roles():
         roles = {
             'User': (Permission.FOLLOW |
                      Permission.COMMENT |
-                     Permission.UPLOAD_PIC),
-            'Admin': Permission.Admin
+                     Permission.UPLOAD_PIC, True),
+            'Admin': (0xff, False)
         }
         for r in roles:
             role = Role.query.filter_by(name=r).first()
@@ -47,6 +48,9 @@ class Role(db.Model):
             role.default = roles[r][1]
             db.session.add(role)
         db.session.commit()
+
+    def __repr__(self):
+        return '<Role %r>' % self.name
 
 
 # create user model

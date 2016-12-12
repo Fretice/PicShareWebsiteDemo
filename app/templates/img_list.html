@@ -2,7 +2,7 @@
     {% for pic in pics %}
     <article class="white-panel">
         <img src="{{ pic.pic_url }}" class="thumb">
-        <h1><a href="">{{ pic.uploader.name }}</a></h1>
+        <h1><a href="{{ url_for('.user', name=pic.uploader.name) }}">{{ pic.uploader.name }}</a></h1>
         <span class="fa fa-lg fa-tag" style="color:gray">{{ pic.tag_name }}</span>
     </article>
     {% endfor %}

@@ -6,11 +6,8 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')  }}">
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='img_list.css')  }}">
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-barber-shop.min.css">
 {% endblock %}
 
 {% block navbar %}
@@ -50,7 +47,7 @@
 {% block content %}
 <div class="container">
 {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning" style="margin-top: 80px">
+    <div class="alert alert-warning" >
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ message }}
     </div>
@@ -59,4 +56,14 @@
 {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript" src="http://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+
+
+  })
+</script>
+{% endblock%}
 
