@@ -1,9 +1,10 @@
 <section id="gallery-wrapper">
     {% for pic in pics %}
     <article class="white-panel">
-        <img src="{{ pic.pic_url }}" class="thumb">
+        <img src="{{ pic.pic_url }}" class="thumb" data-action='zoom'>
         <h1><a href="{{ url_for('.user', name=pic.uploader.name) }}">{{ pic.uploader.name }}</a></h1>
         <span class="fa fa-lg fa-tag" style="color:gray">{{ pic.tag_name }}</span>
+        <span style="margin-left:33%">评论()</span>
     </article>
     {% endfor %}
 </section>

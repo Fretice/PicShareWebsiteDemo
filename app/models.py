@@ -78,6 +78,10 @@ class User(UserMixin, db.Model):
     pics = db.relationship('Pic', backref='uploader', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
+    def ping(self):
+        self.last_since = datetime.utcnow()
+        db.session.add(self)
+
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:

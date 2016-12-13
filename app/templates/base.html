@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')  }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='img_list.css')  }}">
-<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-barber-shop.min.css">
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/pace/1.0.2/themes/black/pace-theme-barber-shop.min.css">
 {% endblock %}
 
 {% block navbar %}
@@ -59,6 +59,7 @@
 {% block scripts %}
 {{ super() }}
 <script type="text/javascript" src="http://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='zooming.js')}}"></script>
 <script type="text/javascript">
   $(function(){
 

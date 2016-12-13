@@ -5,6 +5,14 @@
 
 
 {% block page_content %}
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+<div class="list-group">
+    <h1>{{ user.name }}</h1>
+    <hr>
+
+</div>
+</div>
+
 <div class="col-xs-12 col-sm-9">
 <div class="row">
 {% include "img_list.html" %}
@@ -16,11 +24,7 @@
 </div>
 </div>
 
-<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-<div class="list-group">
-    <h1>图片由{{ user.name }}分享 </h1>
-</div>
-</div>
+
 
 {% endblock%}
 
