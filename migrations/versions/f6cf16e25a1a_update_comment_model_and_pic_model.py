@@ -1,8 +1,8 @@
-"""insert model to database
+"""update comment model and pic model
 
-Revision ID: b46da333f291
+Revision ID: f6cf16e25a1a
 Revises: 
-Create Date: 2016-12-03 22:07:08.638261
+Create Date: 2016-12-14 20:58:14.232639
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b46da333f291'
+revision = 'f6cf16e25a1a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,9 +22,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=32), nullable=True),
     sa.Column('permissions', sa.Integer(), nullable=True),
+    sa.Column('default', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
+    op.create_index(op.f('ix_roles_default'), 'roles', ['default'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=54), nullable=True),
@@ -75,5 +77,6 @@ def downgrade():
     op.drop_table('pics')
     op.drop_table('follows')
     op.drop_table('users')
+    op.drop_index(op.f('ix_roles_default'), table_name='roles')
     op.drop_table('roles')
     # ### end Alembic commands ###

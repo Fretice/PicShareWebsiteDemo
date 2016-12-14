@@ -3,8 +3,8 @@
     <article class="white-panel">
         <img src="{{ pic.pic_url }}" class="thumb" data-action='zoom'>
         <h1><a href="{{ url_for('.user', name=pic.uploader.name) }}">{{ pic.uploader.name }}</a></h1>
-        <span class="fa fa-lg fa-tag" style="color:gray">{{ pic.tag_name }}</span>
-        <span style="margin-left:33%">评论()</span>
+        <span  style="color:gray"><i class="fa fa-lg fa-tag">&nbsp;</i>{{ pic.tag_name }}</span>
+        <span style="margin-left:33%"><i class="fa fa-lg fa-comments">&nbsp;</i> <a href="{{ url_for('.pic', id=pic.id) }}">评论({{ pic.comments.count() }})</a></span>
     </article>
     {% endfor %}
 </section>

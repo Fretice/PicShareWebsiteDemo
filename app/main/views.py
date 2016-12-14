@@ -39,3 +39,8 @@ def user(name):
     return render_template('user.html', page=page, user=user,\
                         pagination=pagination,pics=pics)
 
+
+@main.route('/pic/<id>', methods=['GET', 'POST'])
+def pic(id):
+    pic = Pic.query.filter_by(id=id).first_or_404()
+    return render_template('pic_detail.html', pic=pic)

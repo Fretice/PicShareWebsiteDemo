@@ -128,3 +128,4 @@ class Pic(db.Model):
     upload_time = db.Column(db.DateTime, default=datetime.utcnow)
     uploader_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     tag_name = db.Column(db.String(32))
+    comments = db.relationship('Comment', backref='pics', lazy='dynamic')
