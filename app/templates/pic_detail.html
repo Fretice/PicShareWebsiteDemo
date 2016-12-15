@@ -6,23 +6,26 @@
 {% block page_content %}
 <div class="row">
 <div class="col-xs-6">
-<section id="gallery-wrapper">
-<article class="white-panel">
-        <img src="{{ pic.pic_url }}" class="thumb" data-action='zoom'>
+{# <section id="gallery-wrapper">
+<article class="white-panel"> #}
+
         <h1><a href="{{ url_for('.user', name=pic.uploader.name) }}">{{ pic.uploader.name }}</a></h1>
+
+        <img src="{{ pic.pic_url }}" class="thumb" data-action='zoom'>
         <span  style="color:gray"><i class="fa fa-lg fa-tag">&nbsp;</i>{{ pic.tag_name }}</span>
         {# <span style="margin-left:33%"><i class="fa fa-lg fa-comments">&nbsp;</i> <a href="{{ url_for('.pic', id=pic.id) }}">评论({{ pic.comments.count() }})</a></span> #}
-</article>
+{# </article>
 
-</section>
+</section> #}
 
 </div>
 <div class="col-xs-6">
-<h1>评论</h1>
+<h1>评论({{ pic.comments.count() }})</h1>
+{% if current_user.id!=pic.uploader_id %}
 <form class="form-horizontal" role="form">
   <div class="form-group">
     <div class="col-sm-12 col-md-10">
-      <input type="email" class="form-control" id="txtComment" placeholder="留言给分享作者">
+      <input type="text" class="form-control" id="txtComment" placeholder="留言给分享作者">
     </div>
   </div>
   <div class="form-group">
@@ -31,6 +34,8 @@
     </div>
   </div>
   </form>
+{% endif %}
+  {% include "comment_list.html" %}
 </div>
 
 </div>
@@ -46,10 +51,27 @@
 $(document).ready(function(){
 
     $("#gallery-wrapper").pinterest_grid();
+    $("#txtComment").val("")
 
 })
 function SaveCommit(){
-alert({{ pic.id }})
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+$.ajax({
+    url:$SCRIPT_ROOT+'/pic/save_comment',
+    data:{ pic_id:{{ pic.id }},comment:$("#txtComment").val() },
+    type:'post',
+    dataType:'json',
+    success:function(data){
+        alert('评论成功')
+        window.location.reload();
+    },
+    error:function(){
+        alert('评论失败')
+    }
+
+
+
+})
 }
 </script>
 {% endblock %}

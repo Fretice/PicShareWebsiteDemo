@@ -1,0 +1,12 @@
+<ul>
+    {% for comment in comments %}
+    <li><span>{{ comment.body }}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ url_for('.user', name=comment.author.name) }}" style="float:right;margin-right:20%">{{  comment.author.name }}</a></li>
+    {% endfor %}
+
+{# {% if pagination %}
+<div class="pagination" >
+    {{ macros.pagination_widget(pagination, '.user') }}
+</div>
+{% endif %} #}
+
+</ul>
